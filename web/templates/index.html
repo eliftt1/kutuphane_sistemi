@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kütüphane Sistemi</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .btn { padding: 5px 10px; background: red; color: white; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Kütüphane Kitap Listesi</h1>
+    <a href="/add" style="margin-bottom: 20px; display: inline-block;">+ Yeni Kitap Ekle</a>
+    
+    <form action="/" method="get">
+        <input type="text" name="query" placeholder="Kitap adına göre ara...">
+        <button type="submit">Ara</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Kitap Adı</th>
+            <th>Yazar</th>
+            <th>Yayın Yılı</th>
+            <th>İşlemler</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.name }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.year }}</td>
+            <td><a href="/delete/{{ book.name }}" class="btn">Sil</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

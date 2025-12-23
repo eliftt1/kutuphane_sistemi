@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yeni Kitap Ekle</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 50px; background-color: #f4f4f9; }
+        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h2 { color: #333; text-align: center; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .submit-btn { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .submit-btn:hover { background-color: #218838; }
+        .back-link { display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Yeni Kitap Ekle</h2>
+        <form action="/add" method="POST">
+            <label for="name">Kitap Adı:</label>
+            <input type="text" id="name" name="name" required placeholder="Örn: Sefiller">
+
+            <label for="author">Yazar:</label>
+            <input type="text" id="author" name="author" required placeholder="Örn: Victor Hugo">
+
+            <label for="year">Yayın Yılı:</label>
+            <input type="number" id="year" name="year" required placeholder="Örn: 1862">
+
+            <button type="submit" class="submit-btn">Kütüphaneye Ekle</button>
+        </form>
+        <a href="/" class="back-link">← Listeye Geri Dön</a>
+    </div>
+</body>
+</html>
