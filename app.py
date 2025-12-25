@@ -6,17 +6,25 @@ library = Library()
 
 # Test için örnek veriler
 library.add_book("Sefiller", "Victor Hugo", 1862)
+library.add_book("Suç ve Ceza", "Dostoyevski", 1866)
 
 @app.route('/')
 def index():
-    query = request.args.get('query')
-    author_query = request.args.get('author')
+    # HTML formundan gelen verileri alıyoruz
+    search_term = request.args.get('search_term')
+    search_type = request.args.get('search_type')
     
     books = library.books
-    if query:
-        books = [b for b in books if query.lower() in b.name.lower()]
-    elif author_query:
-        books = [b for b in books if author_query.lower() in b.author.lower()]
+    
+    # Arama yapılmışsa filtreleme mantığı
+    if search_term:
+        search_term = search_term.lower()
+        if search_type == 'author':
+            # Yazara göre arama
+            books = [b for b in books if search_term in b.author.lower()]
+        else:
+            # Varsayılan: Kitap adına göre arama
+            books = [b for b in books if search_term in b.name.lower()]
         
     return render_template('index.html', books=books)
 
