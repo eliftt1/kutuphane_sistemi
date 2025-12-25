@@ -4,20 +4,35 @@
     <title>Kütüphane Sistemi</title>
     <style>
         body { font-family: Arial; margin: 40px; }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
         .btn { padding: 5px 10px; background: red; color: white; text-decoration: none; border-radius: 3px; }
+        
+        /* Arama formu için ufak stil eklemeleri */
+        .search-form { margin-bottom: 20px; padding: 10px; background-color: #f9f9f9; border-radius: 5px; }
+        .search-form input, .search-form select, .search-form button { padding: 8px; margin-right: 5px; }
     </style>
 </head>
 <body>
     <h1>Kütüphane Kitap Listesi</h1>
     <a href="/add" style="margin-bottom: 20px; display: inline-block;">+ Yeni Kitap Ekle</a>
     
-    <form action="/" method="get">
-        <input type="text" name="query" placeholder="Kitap adına göre ara...">
-        <button type="submit">Ara</button>
-    </form>
-
+    <div class="search-form">
+        <form action="/" method="get">
+            <input type="text" name="search_term" placeholder="Arama yapın..." required>
+            
+            <select name="search_type">
+                <option value="name">Kitap Adına Göre</option>
+                <option value="author">Yazara Göre</option>
+            </select>
+            
+            <button type="submit">Ara</button>
+            
+            {% if request.args.get('search_term') %}
+                <a href="/" style="margin-left: 10px; text-decoration: none; color: #666;">× Filtreyi Temizle</a>
+            {% endif %}
+        </form>
+    </div>
     <table>
         <tr>
             <th>Kitap Adı</th>
@@ -31,6 +46,10 @@
             <td>{{ book.author }}</td>
             <td>{{ book.year }}</td>
             <td><a href="/delete/{{ book.name }}" class="btn">Sil</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" style="text-align: center;">Kayıt bulunamadı.</td>
         </tr>
         {% endfor %}
     </table>
